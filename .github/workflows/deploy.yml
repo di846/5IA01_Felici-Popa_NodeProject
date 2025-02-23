@@ -18,11 +18,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/github_deploy
           chmod 600 ~/.ssh/github_deploy
-          ssh-keyscan -H 92.222.25.243 >> ~/.ssh/known_hosts
-
       - name: Deploy to VPS
         run: |
           ssh -i ~/.ssh/github_deploy -o StrictHostKeyChecking=no ubuntu@92.222.25.243 << 'EOF'
+
             # Install nvm if not installed
             if [ ! -d "$HOME/.nvm" ]; then
               curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -44,8 +43,9 @@ jobs:
             # Navigate to project directory
             cd /home/primo/
 
-            # Pull latest changes
-            git pull origin master
+            # Reset local branch
+            git fetch origin master
+            git reset --hard origin/master
 
             # Install project dependencies
             npm install
