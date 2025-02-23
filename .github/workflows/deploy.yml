@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -i ~/.ssh/github_deploy ubuntu@92.222.25.243 <<EOF
-            cd /home/primo/prima_app
+            cd /home/primo/
             git pull origin main
             npm install
             pm2 restart all
