@@ -24,7 +24,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/github_deploy ubuntu@92.222.25.243 <<EOF
             cd /home/primo/
-            git pull origin main
+            git pull origin master
             npm install
             pm2 restart all
           EOF
